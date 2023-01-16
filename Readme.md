@@ -23,4 +23,4 @@ A full stack social media application.
   - MySQL DB
 
 - Authentication :- 
- - JWT 
+  - JWT 
