@@ -7,7 +7,7 @@ A full stack social media application.
 - The app will provide the users to add new posts and stories which will be visible to the other users.
 - The users can comment and like the posts from other users.
 
-## Tech stack used :- 
+## Technologies used :- 
 - Front-end :- 
   - ReactJS
   - SCSS
@@ -21,3 +21,6 @@ A full stack social media application.
   
 - Database :- 
   - MySQL DB
+
+- Authentication :- 
+ - JWT 
