@@ -47,7 +47,7 @@
         flex: 5;
         display: flex;
         flex-direction: column;
-        gap: 3px;
+        gap: 8px;
         align-items: flex-start;
 
         span {
@@ -61,6 +61,7 @@
 
       .date {
         flex: 1;
+        display: flex;
         align-self: center;
         color: gray;
         font-size: 12px;
