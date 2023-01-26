@@ -1,7 +1,6 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment";
-import { format } from "mysql";
 
 export const getPosts = (req, res) => {
   const token = req.cookies.accessToken;
