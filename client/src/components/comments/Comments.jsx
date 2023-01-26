@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-import Comment from "../comment/Comment";
+import moment from "moment";
 
 const Comments = ({ postId }) => {
   const { currentUser } = useContext(AuthContext);
@@ -54,7 +54,16 @@ const Comments = ({ postId }) => {
         ? "Something went wrong!"
         : isLoading
         ? "Loading"
-        : data.map((comment) => <Comment key={comment.id} comment={comment} />)}
+        : data.map((comment) => (
+            <div key={comment.id} className="comment">
+              <img src={comment.profilePic} alt="" />
+              <div className="info">
+                <span>{comment.name}</span>
+                <p>{comment.desc}</p>
+              </div>
+              <div className="date">{moment(comment.createdAt).fromNow()}</div>
+            </div>
+          ))}
     </div>
   );
 };
