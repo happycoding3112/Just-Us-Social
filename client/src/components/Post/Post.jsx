@@ -4,15 +4,45 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SmsOutlinedIcon from "@mui/icons-material/SmsOutlined";
 import ShareIcon from "@mui/icons-material/Share";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import Comments from "../comments/Comments";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../axios.js";
+import { AuthContext } from "../../context/authContext";
 
 const Post = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
 
-  const liked = false;
+  const { currentUser } = useContext(AuthContext);
+
+  const queryClient = useQueryClient();
+
+  const { isLoading, data } = useQuery(["likes", post.id], () =>
+    makeRequest.get("/likes?postId=" + post.id).then((res) => {
+      return res.data;
+    })
+  );
+
+  const mutation = useMutation(
+    (liked) => {
+      if (liked) return makeRequest.delete("/likes?postId=" + post.id);
+      return makeRequest.post("/likes", { postId: post.id });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["likes"]);
+      },
+    }
+  );
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    mutation.mutate(data.includes(currentUser.id));
+  };
+
+  console.log(data);
 
   return (
     <div className="post">
@@ -39,9 +69,15 @@ const Post = ({ post }) => {
           <img src={"./upload/" + post.img} alt="" />
         </div>
         <div className="info">
-          <div className="item">
-            {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            <span>Likes</span>
+          <div className="item" onClick={handleClick}>
+            {isLoading ? (
+              "loading"
+            ) : data.includes(currentUser.id) ? (
+              <FavoriteIcon style={{ color: "red" }} />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+            <span>{data?.length} Likes</span>
           </div>
           <div className="item" onClick={() => setShowComment(!showComment)}>
             <SmsOutlinedIcon />
