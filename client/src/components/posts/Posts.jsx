@@ -3,12 +3,16 @@ import Post from "../Post/Post";
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 
-const Posts = () => {
-  const { isLoading, error, data } = useQuery(["posts"], () =>
-    makeRequest.get("/posts").then((res) => {
-      return res.data;
-    })
-  );
+const Posts = ({ userId }) => {
+  const { isLoading, error, data } = useQuery(["posts"], () => {
+    userId
+      ? makeRequest.get("/posts?userId=" + userId).then((res) => {
+          return res.data;
+        })
+      : makeRequest.get("/posts").then((res) => {
+          return res.data;
+        });
+  });
 
   return (
     <div className="posts">
@@ -16,7 +20,7 @@ const Posts = () => {
         ? "Something went wrong!"
         : isLoading
         ? "Loading!"
-        : data.map((post) => <Post key={post.id} post={post} />)}
+        : data.map((post) => <Post post={post} key={post.id} />)}
     </div>
   );
 };
