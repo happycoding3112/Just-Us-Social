@@ -42,8 +42,6 @@ const Post = ({ post }) => {
     mutation.mutate(data.includes(currentUser.id));
   };
 
-  console.log(data);
-
   return (
     <div className="post">
       <div className="container">
@@ -66,7 +64,7 @@ const Post = ({ post }) => {
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          <img src={"./upload/" + post.img} alt="" />
+          <img src={"/upload/" + post.img} alt="" />
         </div>
         <div className="info">
           <div className="item" onClick={handleClick}>
