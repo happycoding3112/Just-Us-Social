@@ -16,6 +16,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
 
         .userInfo {
           display: flex;
@@ -41,6 +42,17 @@
             border-radius: 50%;
             object-fit: cover;
           }
+        }
+
+        button {
+          position: absolute;
+          top: 30px;
+          right: 3px;
+          color: white;
+          background-color: #f0544f;
+          padding: 5px;
+          border: none;
+          cursor: pointer;
         }
       }
 
