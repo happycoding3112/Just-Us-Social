@@ -15,6 +15,8 @@ import { AuthContext } from "../../context/authContext";
 const Post = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { currentUser } = useContext(AuthContext);
 
   const queryClient = useQueryClient();
@@ -37,9 +39,20 @@ const Post = ({ post }) => {
     }
   );
 
+  const deleteMutation = useMutation(
+    (postId) => makeRequest.delete("/posts/" + postId),
+    {
+      onSuccess: () => queryClient.invalidateQueries(["posts"]),
+    }
+  );
+
   const handleClick = (e) => {
     e.preventDefault();
     mutation.mutate(data.includes(currentUser.id));
+  };
+
+  const deletePost = () => {
+    deleteMutation.mutate(post.id);
   };
 
   return (
@@ -59,7 +72,13 @@ const Post = ({ post }) => {
             </div>
           </div>
           <div className="more">
-            <MoreHorizIcon />
+            <MoreHorizIcon
+              style={{ cursor: "pointer" }}
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+            {menuOpen && post.userId === currentUser.id && (
+              <button onClick={deletePost}>Delete Post</button>
+            )}
           </div>
         </div>
         <div className="content">
