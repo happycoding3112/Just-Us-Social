@@ -23,7 +23,7 @@ export const addLike = (req, res) => {
     const values = [userInfo.id, req.body.postId];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json("Internal Server Error!");
+      if (err) return res.status(500).json(err);
       return res.status(200).json("Liked the post successfully!");
     });
   });
@@ -40,7 +40,7 @@ export const deleteLike = (req, res) => {
     const q = "DELETE FROM likes WHERE userId = (?) AND postId = (?)";
 
     db.query(q, [userInfo.id, req.query.postId], (err, data) => {
-      if (err) return res.status(500).json("Internal Server Error!");
+      if (err) return res.status(500).json(err);
       return res.status(200).json("Removed Like from the Post");
     });
   });
