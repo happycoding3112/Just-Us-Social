@@ -77,14 +77,15 @@
         align-items: center;
         gap: 10px;
         font-weight: 500;
+        cursor: pointer;
 
         @include tablet {
           display: none;
         }
 
         img {
-          height: 30px;
-          width: 30px;
+          height: 40px;
+          width: 40px;
           border-radius: 50%;
           object-fit: cover;
         }
