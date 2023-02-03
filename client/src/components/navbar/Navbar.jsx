@@ -1,4 +1,5 @@
 import "./navbar.scss";
+import Menu from "../userMenu/Menu";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
@@ -9,12 +10,13 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="navbar">
@@ -46,16 +48,11 @@ const Navbar = () => {
         <PersonOutlineOutlinedIcon />
         <EmailOutlinedIcon />
         <NotificationsNoneOutlinedIcon />
-        <Link
-          to={`/profile/${currentUser.id}`}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <div className="user">
-            <img src={currentUser.profilePic} alt="" />
-            <span>{currentUser.name}</span>
-          </div>
-        </Link>
+        <div className="user" onClick={() => setMenuOpen(!menuOpen)}>
+          <img src={currentUser.profilePic} alt="" />
+        </div>
       </div>
+      {menuOpen && <Menu />}
     </div>
   );
 };
