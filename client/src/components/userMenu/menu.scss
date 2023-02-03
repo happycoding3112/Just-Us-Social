@@ -1,0 +1,70 @@
+@import "../../styles.scss";
+
+.userMenu {
+  @include themify($themes) {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: themed("bg");
+    border-radius: 7px;
+    width: 360px;
+    box-shadow: themed("shadow");
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+      border-radius: 10px;
+      gap: 20px;
+
+      .userInfo {
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+        color: themed("textColor");
+
+        span {
+          font-size: 18px;
+        }
+
+        img {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .logout {
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        height: 40px;
+
+        button {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          border: none;
+          gap: 20px;
+          background-color: transparent;
+          color: themed("textColor");
+        }
+
+        span {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .container :hover {
+      background-color: themed("bgSoft");
+      border-radius: 10px;
+    }
+  }
+}
