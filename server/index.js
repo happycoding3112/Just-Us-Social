@@ -5,7 +5,7 @@ import likeRoutes from "./routes/likes.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import commentRoutes from "./routes/comments.js";
-import relationshipRoutes from "./routes/relationships.js"
+import relationshipRoutes from "./routes/relationships.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import multer from "multer";
