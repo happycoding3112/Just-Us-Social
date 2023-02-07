@@ -53,10 +53,6 @@ const Update = ({ setOpen, user }) => {
     }
   };
 
-  console.log({ cover, profile });
-  console.log(txtInputs);
-  console.log(mutation.data);
-
   return (
     <div className="update">
       <div className="wrapper">
