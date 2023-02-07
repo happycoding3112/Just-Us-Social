@@ -49,7 +49,7 @@ const Navbar = () => {
         <EmailOutlinedIcon />
         <NotificationsNoneOutlinedIcon />
         <div className="user" onClick={() => setMenuOpen(!menuOpen)}>
-          <img src={currentUser.profilePic} alt="" />
+          <img src={"/upload/" + currentUser.profilePic} alt="" />
         </div>
       </div>
       {menuOpen && <Menu />}

@@ -7,20 +7,23 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
+import Update from "../../components/update/Update";
 import { makeRequest } from "../../axios";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
+  const [updateOpen, setUpdateOpen] = useState(false);
+
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 
   const { currentUser } = useContext(AuthContext);
 
   const queryClient = useQueryClient();
 
-  const { isLoading, error, data } = useQuery(["user", userId], () =>
+  const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
       return res.data;
     })
@@ -60,8 +63,12 @@ const Profile = () => {
       ) : (
         <>
           <div className="images">
-            <img src={data.coverPic} alt="" className="cover" />
-            <img src={data.profilePic} alt="" className="profilePic" />
+            <img src={"/upload/" + data.coverPic} alt="" className="cover" />
+            <img
+              src={"/upload/" + data.profilePic}
+              alt=""
+              className="profilePic"
+            />
           </div>
           <div className="profileContainer">
             <div className="uInfo">
@@ -91,7 +98,7 @@ const Profile = () => {
                 {rIsLoading ? (
                   "Loading"
                 ) : currentUser.id === userId ? (
-                  <button>Update</button>
+                  <button onClick={() => setUpdateOpen(true)}>Update</button>
                 ) : (
                   <button onClick={handleFollow}>
                     {relationshipData.includes(currentUser.id)
@@ -109,6 +116,7 @@ const Profile = () => {
           </div>
         </>
       )}
+      {updateOpen && <Update setOpen={setUpdateOpen} user={data} />}
     </div>
   );
 };
