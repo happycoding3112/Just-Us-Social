@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { makeRequest } from "../../axios.js";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "./update.scss";
@@ -7,6 +7,7 @@ import "./update.scss";
 const Update = ({ setOpen, user }) => {
   const [cover, setCover] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [userInfo, updateUserInfo] = useState(user);
   const [txtInputs, setTxtInputs] = useState({
     name: user.name,
     city: user.city,
@@ -17,7 +18,9 @@ const Update = ({ setOpen, user }) => {
 
   const mutation = useMutation((user) => makeRequest.put("/users", user), {
     onSuccess: () => {
+      updateUserInfo(user);
       queryClient.invalidateQueries(["user"]);
+      setOpen(false);
     },
   });
 
@@ -47,11 +50,14 @@ const Update = ({ setOpen, user }) => {
         profilePic: profileURL,
         coverPic: coverURL,
       });
-      setOpen(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(userInfo));
+  }, [userInfo]);
 
   return (
     <div className="update">
