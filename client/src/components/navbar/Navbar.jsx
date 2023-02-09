@@ -10,13 +10,26 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
+import { makeRequest } from "../../axios";
+import Search from "../search/Search";
 
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [queryData, setQueryData] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await makeRequest.get(`/search?ltr=${query}`);
+      setQueryData(res.data);
+    };
+    fetchUsers();
+  }, [query]);
 
   return (
     <div className="navbar">
@@ -41,7 +54,15 @@ const Navbar = () => {
         <GridViewOutlinedIcon />
         <div className="search">
           <SearchOutlinedIcon />
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => setQuery(e.target.value)}
+            onClick={() => setSearchOpen(true)}
+          />
+          {searchOpen && query.length > 0 && (
+            <Search data={queryData} toggleSearch={setSearchOpen} />
+          )}
         </div>
       </div>
       <div className="right">
@@ -52,7 +73,7 @@ const Navbar = () => {
           <img src={"/upload/" + currentUser.profilePic} alt="" />
         </div>
       </div>
-      {menuOpen && <Menu />}
+      {menuOpen && <Menu toggleMenu={setMenuOpen} />}
     </div>
   );
 };
