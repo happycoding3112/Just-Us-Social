@@ -5,7 +5,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 
-const Menu = () => {
+const Menu = ({ toggleMenu }) => {
   const { currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const Menu = () => {
         <Link
           to={"/profile/" + currentUser.id}
           style={{ textDecoration: "none" }}
+          onClick={() => toggleMenu(false)}
         >
           <div className="userInfo">
             <img src={"/upload/" + currentUser.profilePic} alt="" />
