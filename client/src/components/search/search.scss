@@ -1,0 +1,86 @@
+@import "../../styles.scss";
+
+.searchContainer {
+  @include themify($themes) {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 53px;
+    z-index: 999;
+    border-radius: 10px;
+    background-color: themed("bg");
+    width: 544px;
+    min-height: 100px;
+    box-shadow: themed("shadow");
+
+    .container {
+      .users {
+        display: flex;
+        gap: 50px;
+      }
+
+      .usrLinks {
+        width: 100%;
+
+        .userInfo {
+          display: flex;
+          align-items: center;
+          padding: 20px;
+          gap: 30px;
+          margin: 10px 15px;
+          cursor: pointer;
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          span {
+            color: themed("textColor");
+          }
+        }
+
+        .userInfo:hover {
+          border-radius: 10px;
+          background-color: themed("bgSoft");
+        }
+      }
+
+      .closeMenu {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin: 0px 15px;
+        padding: 20px;
+
+        button {
+          border-radius: 50%;
+          height: 40px;
+          width: 40px;
+          border: none;
+          color: themed("textColor");
+          background: themed("bg");
+          cursor: pointer;
+          ;
+        }
+
+        span {
+          color: themed("textColor");
+        }
+      }
+
+      .closeMenu:hover {
+        background-color: themed("bgSoft");
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        button {
+          background-color: themed("bg");
+        }
+      }
+    }
+  }
+}
