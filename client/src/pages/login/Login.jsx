@@ -34,10 +34,6 @@ const Login = () => {
       <div className="card">
         <div className="left">
           <h1>Hello There.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            exercitationem facilis temporibus, culpa eum?{" "}
-          </p>
           <span>Don't Have an account?</span>
           <Link to="/register">
             <button>Register</button>

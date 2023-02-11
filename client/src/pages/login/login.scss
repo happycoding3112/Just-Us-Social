@@ -1,6 +1,6 @@
 .login {
   height: 100vh;
-  background-color: rgb(193, 190, 255);
+  background-color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +12,11 @@
     border-radius: 10px;
     min-height: 600px;
     overflow: hidden;
+    box-shadow: 0px 0px 15px 7px rgb(0 0 0 / 9%);
+
+    button {
+      border-radius: 5px;
+    }
 
     .left {
       flex: 1;
@@ -39,7 +44,7 @@
         padding: 10px;
         border: none;
         background-color: white;
-        color: rebeccapurple;
+        color: black;
         font-weight: bold;
         cursor: pointer;
       }
@@ -73,7 +78,7 @@
           width: 50%;
           padding: 10px;
           border: none;
-          background-color: #938eef;
+          background-color: #0d00ff;
           color: white;
           font-weight: bold;
           cursor: pointer;
