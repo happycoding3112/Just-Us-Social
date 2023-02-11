@@ -21,6 +21,7 @@ const Update = ({ setOpen, user }) => {
       updateUserInfo(user);
       queryClient.invalidateQueries(["user"]);
       setOpen(false);
+      window.location.reload();
     },
   });
 
