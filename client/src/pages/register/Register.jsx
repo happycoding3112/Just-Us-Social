@@ -67,10 +67,6 @@ const Register = () => {
         </div>
         <div className="right">
           <h1>Just Us Social.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            exercitationem facilis temporibus, culpa eum?{" "}
-          </p>
           <span>Already Have an account?</span>
           <Link to="/login">
             <button>Login</button>
