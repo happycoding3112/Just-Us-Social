@@ -14,6 +14,7 @@ const Menu = ({ toggleMenu }) => {
     e.preventDefault();
     try {
       await makeRequest.post("/auth/logout");
+      localStorage.removeItem("user");
       navigate("/login");
     } catch (err) {
       console.log(err);
