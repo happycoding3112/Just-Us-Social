@@ -47,12 +47,14 @@ const Login = () => {
               placeholder="Username"
               name="username"
               onChange={handleChange}
+              autoComplete="off"
             />
             <input
               type="password"
               placeholder="Password"
               name="password"
               onChange={handleChange}
+              autoComplete="off"
             />
             <span style={{ color: "red" }}>{err && err}</span>
             <button onClick={handleLogin}>Login</button>
