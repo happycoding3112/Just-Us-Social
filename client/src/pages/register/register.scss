@@ -19,7 +19,7 @@
     }
 
     .left {
-      flex: 1.5;
+      flex: 1.25;
       display: flex;
       flex-direction: column;
       padding: 50px;
@@ -36,11 +36,22 @@
         flex-direction: column;
         gap: 30px;
 
-        input {
-          border: none;
-          outline: none;
-          border-bottom: 1px solid lightgray;
-          padding: 20px 10px;
+        .formInputs {
+          display: flex;
+          flex-direction: column;
+
+          input {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid lightgray;
+            padding: 20px 10px;
+          }
+
+          .errorMsg {
+            color: red;
+            font-size: 14px;
+          }
+
         }
 
         button {
