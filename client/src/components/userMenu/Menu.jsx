@@ -30,7 +30,14 @@ const Menu = ({ toggleMenu }) => {
           onClick={() => toggleMenu(false)}
         >
           <div className="userInfo">
-            <img src={"/upload/" + currentUser.profilePic} alt="" />
+            <img
+              src={
+                currentUser.profilePic
+                  ? "/upload/" + currentUser.profilePic
+                  : "/default_profile_pic.jpg"
+              }
+              alt=""
+            />
             <span>{currentUser.name}</span>
           </div>
         </Link>
